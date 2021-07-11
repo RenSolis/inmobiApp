@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_gray">
+
+    <View
+        android:id="@+id/detail_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_whitebackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_Img"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/detail_Img"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/detail_TitleMeters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_metros"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVMeters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_background" />
+
+    <TextView
+        android:id="@+id/detail_TVMeters"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVType"
+        app:layout_constraintTop_toTopOf="@+id/detail_background" />
+
+    <TextView
+        android:id="@+id/detail_TitleType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_tipo"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleMeters" />
+
+    <TextView
+        android:id="@+id/detail_TVType"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="88dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVMeters" />
+
+    <TextView
+        android:id="@+id/detail_TitleRooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_rooms"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVRooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleType" />
+
+    <TextView
+        android:id="@+id/detail_TVRooms"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintStart_toEndOf="@+id/detail_TitleRooms"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVType"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVType" />
+
+    <TextView
+        android:id="@+id/detail_TitleAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_address"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleRooms" />
+
+    <TextView
+        android:id="@+id/detail_TVAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintStart_toEndOf="@+id/detail_TitleAddress"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVRooms"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVRooms" />
+
+    <TextView
+        android:id="@+id/detail_TitleFloors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_floors"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVFloors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleAddress" />
+
+    <TextView
+        android:id="@+id/detail_TVFloors"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintStart_toEndOf="@+id/detail_TitleFloors"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVAddress"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVAddress" />
+
+    <TextView
+        android:id="@+id/detail_TitlePrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_price"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleFloors" />
+
+    <TextView
+        android:id="@+id/detail_TVPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintStart_toEndOf="@+id/detail_TitlePrice"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVFloors"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVFloors" />
+
+    <TextView
+        android:id="@+id/detail_TitleAdq"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="@string/detail_adq"
+        app:layout_constraintEnd_toStartOf="@+id/detail_TVAdq"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitlePrice" />
+
+    <TextView
+        android:id="@+id/detail_TVAdq"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:hint="aaaaaa"
+        app:layout_constraintStart_toStartOf="@+id/detail_TVPrice"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TVPrice" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/detail_BttnFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundable_bttn"
+        android:drawableStart="@drawable/ic_baseline_add_circle_24"
+        android:drawablePadding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/Button_Favorites"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_TitleAdq"
+        app:layout_constraintVertical_bias="0.259" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

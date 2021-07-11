@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android                                   ="http://schemas.android.com/apk/res/android"
+    xmlns:app                                       ="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width                            ="wrap_content"
+    android:layout_height                           ="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/recycler_item"
+            android:layout_width="410dp"
+            android:layout_height="356dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/item_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="166dp"
+                android:scaleType="fitXY"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="148dp" />
+
+            <TextView
+                android:id="@+id/item_TVAdq"
+                android:layout_width="332dp"
+                android:layout_height="43dp"
+                android:layout_below="@+id/item_Img"
+                android:layout_alignTop="@+id/item_Img"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="177dp"
+                android:layout_marginEnd="60dp"
+                android:background="#3E878787"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="aasd"
+                android:textColor="@color/almost_blue"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_TVType"
+                android:layout_width="133dp"
+                android:layout_height="21dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="214dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/roundable_bttn"
+                android:gravity="center"
+                android:hint="Tipo"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/item_TVAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_TVAdq"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="7dp"
+                android:hint="Direccion" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/item_BttnSeeMore"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_below="@+id/item_TVAddress"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/yellow_roundable"
+                android:drawableRight="@drawable/forward_white"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Button_SeeMore"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

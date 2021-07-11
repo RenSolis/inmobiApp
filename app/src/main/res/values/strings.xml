@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">inmobiApp</string>
+    <string name="app_name">DAPM_INM</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email address</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Ingresar</string>
+    <string name="action_sign_in_short">Ingresar</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_login">Ingresa a tu cuenta</string>
+    <string name="idk">O ingresa con</string>
+    <string name="cuenta">¿No tienes una cuenta?</string>
+    <string name="registro">Crea una</string>
+    <string name="password">¿Olvidaste tu contraseña?</string>
+
+    <!-- Strings related to singing up -->
+    <string name="account_data">Crear cuenta</string>
+    <string name="user_name">Nombre</string>
+    <string name="user_lastname">Apellidos</string>
+    <string name="sign_up_email">Email address</string>
+    <string name="sign_up_password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="invalid_name">Nombre Invalido</string>
+    <string name="invalid_lastname">Apellido Invalido</string>
+    <string name="invalid_email">Correo Invalido</string>
+    
+    <!--String to button item -->
+    <string name="Button_SeeMore">Ver Mas</string>
+
+    <!--String to details item -->
+    <string name="Button_Favorites">Añadir a Favoritos</string>
+    <string name="detail_metros">Metros: </string>
+    <string name="detail_tipo">Tipo: </string>
+    <string name="detail_address">Direccion: </string>
+    <string name="detail_rooms">Dormitorios: </string>
+    <string name="detail_floors">Pisos: </string>
+    <string name="detail_adq">Adquisicion: </string>
+    <string name="detail_price">Precio: </string>
+
 </resources>

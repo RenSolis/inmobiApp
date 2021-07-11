@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android                               ="http://schemas.android.com/apk/res/android"
+    xmlns:app                                   ="http://schemas.android.com/apk/res-auto"
+    android:id                                  ="@+id/activity_register"
+    android:layout_width                        ="match_parent"
+    android:layout_height                       ="match_parent">
+
+    <TextView
+        android:id                              ="@+id/textView"
+        android:layout_width                    ="0dp"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="50dp"
+        android:layout_marginEnd                ="32dp"
+        android:fontFamily                      ="@font/source_sans_pro_bold"
+        android:gravity                         ="left"
+        android:text                            ="@string/account_data"
+        android:textColor                       ="@color/almost_blue"
+        android:textSize                        ="@dimen/title_size"
+        android:textStyle                       ="bold"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintHorizontal_bias    ="0.149"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toTopOf        ="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/signup_name"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="32dp"
+        android:layout_marginEnd                ="32dp"
+        android:hint                            ="@string/user_name"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/textView">
+
+        <EditText
+            android:id                          ="@+id/et_name"
+            android:layout_width                ="match_parent"
+            android:layout_height               ="match_parent"
+            android:fontFamily                  ="@font/source_sans_pro" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/signup_lastname"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="16dp"
+        android:layout_marginEnd                ="32dp"
+        android:hint                            ="@string/user_lastname"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/signup_name">
+
+        <EditText
+            android:id                          ="@+id/et_lastname"
+            android:layout_width                ="match_parent"
+            android:layout_height               ="match_parent"
+            android:fontFamily                  ="@font/source_sans_pro" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/signup_email"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="16dp"
+        android:layout_marginEnd                ="32dp"
+        android:hint                            ="@string/sign_up_email"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/signup_lastname">
+
+        <EditText
+            android:id                          ="@+id/et_email"
+            android:layout_width                ="match_parent"
+            android:layout_height               ="match_parent"
+            android:fontFamily                  ="@font/source_sans_pro" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/signup_password"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="16dp"
+        android:layout_marginEnd                ="32dp"
+        android:hint                            ="@string/sign_up_password"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/signup_email">
+
+        <EditText
+            android:id                          ="@+id/et_password"
+            android:layout_width                ="match_parent"
+            android:layout_height               ="match_parent"
+            android:fontFamily                  ="@font/source_sans_pro"
+            android:inputType                   ="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/signup_confirmpswd"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="32dp"
+        android:layout_marginTop                ="16dp"
+        android:layout_marginEnd                ="32dp"
+        android:hint                            ="@string/confirm_password"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/signup_password">
+
+        <EditText
+            android:id                          ="@+id/et_confirmpassword"
+            android:layout_width                ="match_parent"
+            android:layout_height               ="match_parent"
+            android:fontFamily                  ="@font/source_sans_pro"
+            android:inputType                   ="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id                              ="@+id/register_button"
+        android:layout_width                    ="266dp"
+        android:layout_height                   ="55dp"
+        android:layout_gravity                  ="center"
+        android:layout_marginStart              ="70dp"
+        android:layout_marginTop                ="32dp"
+        android:layout_marginEnd                ="70dp"
+        android:fontFamily                      ="@font/source_sans_pro_bold"
+        android:text                            ="@string/create_account"
+        app:layout_constraintBottom_toBottomOf  ="parent"
+        app:layout_constraintEnd_toEndOf        ="parent"
+        app:layout_constraintHorizontal_bias    ="0.4"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toBottomOf     ="@+id/signup_confirmpswd"
+        app:layout_constraintVertical_bias      ="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
