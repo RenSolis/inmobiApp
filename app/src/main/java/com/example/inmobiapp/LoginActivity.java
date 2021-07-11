@@ -129,9 +129,8 @@ public class LoginActivity extends AppCompatActivity {
         mTv_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "IR A REGISTRO", Toast.LENGTH_SHORT);
-                // Intent intent=new Intent(LoginActivity.this, Register_Activity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -146,8 +145,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 user_email      = mEt_Email.getText().toString().trim();
                 user_password   = mEt_Password.getText().toString().trim();
-
-                //Validacion de campos
 
                 //Email vacio
                 if (TextUtils.isEmpty(user_email)){
