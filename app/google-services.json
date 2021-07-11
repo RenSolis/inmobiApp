@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "473702523229-mp8c7fq7o082lqm8ff27s18jlrandcff.apps.googleusercontent.com",
+          "client_id": "473702523229-r9dplpm8k3s87u1i2ncefhu478icnok1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.inmobiapp",
-            "certificate_hash": "24381dceead5a9d5e174961b79ba5bc5317ed0d2"
+            "certificate_hash": "866a6d615f0dd0764a19e04f7dc88615db492a52"
           }
         },
         {
