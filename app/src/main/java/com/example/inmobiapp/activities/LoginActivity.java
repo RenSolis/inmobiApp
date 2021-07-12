@@ -1,4 +1,4 @@
-package com.example.inmobiapp;
+package com.example.inmobiapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.inmobiapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,7 +29,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-// import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
@@ -64,22 +64,10 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LoginActivity.this, "Log In con Google exitoso",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
-                        //obtener el usuario loggeado
-                        // FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
-                        //verificar si es un usuario nuevo o ya existente
-                        if (authResult.getAdditionalUserInfo().isNewUser()){
-                            Toast.makeText(LoginActivity.this, "Cuenta creada",Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Usuario existente",Toast.LENGTH_SHORT).show();
-                        }
-
-                        //Ir al siguiente acitivity
-                        Toast.makeText(LoginActivity.this, "FUNCIONO", Toast.LENGTH_SHORT);
-                        // Intent intent=new Intent(LoginActivity.this, ListInmuebles.class);
-                        // startActivity(intent);
+                        Intent intent = new Intent(LoginActivity.this, ListProperties.class);
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -102,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         mEt_Email = findViewById(R.id.login_email);
         mEt_Password = findViewById(R.id.login_password);
 
-        //Inicializacion de la Autenticacion en Firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -114,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         mTv_ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+                Toast.makeText(LoginActivity.this, "En proceso de creación", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -134,55 +121,46 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //Loggearse a la aplicacion
         mButton_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String user_email = mEt_Email.getText().toString().trim();
+                String user_password = mEt_Password.getText().toString().trim();
 
-                //Asignacion de variables a Strings
-                String user_email;
-                String user_password;
-
-                user_email      = mEt_Email.getText().toString().trim();
-                user_password   = mEt_Password.getText().toString().trim();
-
-                //Email vacio
-                if (TextUtils.isEmpty(user_email)){
-                    mEt_Email.setError("Campo no puede estar vacio");
+                if (TextUtils.isEmpty(user_email)) {
+                    mEt_Email.setError("Correo es obligatorio");
                     return;
                 }
 
-                //Revision de email valido
-                if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()){
-                    mEt_Email.setError("Ingrese un correo valido");
+                if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
+                    mEt_Email.setError("Ingrese un correo válido");
                     return;
                 }
 
-                //Contraseña vacia
-                if (TextUtils.isEmpty(user_password)){
-                    mEt_Password.setError("Campo no puede estar vacio");
+                if (TextUtils.isEmpty(user_password)) {
+                    mEt_Password.setError("Contraseña es obligatoria");
                     return;
                 }
 
-                //Cantidad de caracteres en contraseña
-                if (user_password.length()<6){
+                if (user_password.length() < 6) {
                     mEt_Password.setError("Contraseña debe tener mas de 6 caracteres");
                     return;
                 }
 
-                //Autenticacion de usuario
-                mFirebaseAuth.signInWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this,"Log In exitoso", Toast.LENGTH_SHORT).show();
-                            // Intent intent=new Intent(Login_Activity.this,ListInmuebles.class);
-                            // startActivity(intent);
+                mFirebaseAuth.signInWithEmailAndPassword(user_email,user_password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            Toast.makeText(LoginActivity.this,"Error: "+task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                        }
-                    }
+                                    Intent intent = new Intent(LoginActivity.this, ListProperties.class);
+                                    startActivity(intent);
+                                } else {
+                                    Log.w("Error Login:", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Correo/Contraseña érroneas", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                 });
             }
         });

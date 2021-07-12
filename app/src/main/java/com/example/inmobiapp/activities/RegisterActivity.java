@@ -1,5 +1,6 @@
-package com.example.inmobiapp;
+package com.example.inmobiapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.inmobiapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -96,7 +97,10 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Intent intent = new Intent(RegisterActivity.this, ListInmuebles.class);
+                                Toast.makeText(RegisterActivity.this, "Registro exitoso!", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(RegisterActivity.this, ListProperties.class);
+                                startActivity(intent);
                             } else {
                                 Log.w("ERROR:", task.getException());
                                 Toast.makeText(RegisterActivity.this, "No se pudo crear la cuenta", Toast.LENGTH_SHORT).show();
