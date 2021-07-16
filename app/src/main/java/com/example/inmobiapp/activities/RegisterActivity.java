@@ -19,6 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText et_Name;
@@ -28,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText et_PasswordConfirmation;
     Button b_Register;
     FirebaseAuth mFirebaseAuth;
+    FirebaseFirestore database;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         et_Password = findViewById(R.id.et_password);
         et_PasswordConfirmation = findViewById(R.id.et_confirmpassword);
         b_Register = findViewById(R.id.register_button);
+
+        database = FirebaseFirestore.getInstance();
 
         b_Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +106,30 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Registro exitoso!", Toast.LENGTH_SHORT).show();
+                                FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("name", name);
+                                user.put("lastName", lastName);
+                                user.put("email", email);
 
-                                Intent intent = new Intent(RegisterActivity.this, ListProperties.class);
-                                startActivity(intent);
+                                // TODO: validar como funciona cuando se vuelve a mandar el mismo correo del usuario
+                                database.collection("users")
+                                        .document(currentUser.getUid())
+                                        .set(user)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(RegisterActivity.this, "Registro exitoso!", Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent(RegisterActivity.this, ListProperties.class);
+                                                    startActivity(intent);
+                                                } else {
+                                                    Log.w("Error Login:", task.getException());
+                                                    Toast.makeText(RegisterActivity.this, "No se pudo registrar al usuario", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                             } else {
                                 Log.w("ERROR:", task.getException());
                                 Toast.makeText(RegisterActivity.this, "No se pudo crear la cuenta", Toast.LENGTH_SHORT).show();

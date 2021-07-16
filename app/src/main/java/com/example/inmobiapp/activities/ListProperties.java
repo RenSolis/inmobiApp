@@ -15,7 +15,6 @@ import com.example.inmobiapp.models.Property;
 import com.example.inmobiapp.models.PropertyAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -66,7 +65,10 @@ public class ListProperties extends AppCompatActivity {
                                 @Override
                                 public void onItemClickListener(Property property) {
                                     Toast.makeText(ListProperties.this, "HOLA", Toast.LENGTH_SHORT);
-                                    // Intent intent = new Intent(ListProperties.this, DetailProperty.class);
+
+                                    Intent intent = new Intent(ListProperties.this, ShowProperty.class);
+                                    intent.putExtra("property_key", property.getId());
+                                    startActivity(intent);
                                 }
                             });
 

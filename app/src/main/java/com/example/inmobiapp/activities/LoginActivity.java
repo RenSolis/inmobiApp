@@ -29,7 +29,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     TextView mTv_Register;
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText mEt_Password;
     FirebaseAuth mFirebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
+    FirebaseFirestore database;
     static final int RC_SIGN_IN = 100;
 
     @Override
@@ -64,10 +70,29 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("name", currentUser.getDisplayName());
+                        user.put("email", currentUser.getEmail());
 
-                        Intent intent = new Intent(LoginActivity.this, ListProperties.class);
-                        startActivity(intent);
+                        // TODO: validar que ya exista para no crear de mas
+                        database.collection("users")
+                                .document(currentUser.getUid())
+                                .set(user)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(LoginActivity.this, ListProperties.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Log.w("Error Login:", task.getException());
+                                            Toast.makeText(LoginActivity.this, "No se iniciar sesion :(", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -91,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         mEt_Password = findViewById(R.id.login_password);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseFirestore.getInstance();
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
