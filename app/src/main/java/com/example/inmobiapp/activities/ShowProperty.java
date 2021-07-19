@@ -1,5 +1,6 @@
 package com.example.inmobiapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -31,11 +31,11 @@ public class ShowProperty extends AppCompatActivity {
     TextView mPrice;
     TextView mType;
     TextView mAcquisition;
-    String mImageURL;
     Button mButtonFavorite;
     FirebaseFirestore database;
-    DocumentReference users;
     String imgURL;
+    Property property;
+    // TODO: crear un property donde se almacenen al obtenerlo todos los attributes y a partir de eso reutilizar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +66,35 @@ public class ShowProperty extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
 
                             if (document.exists()) {
-                                mType.setText(document.get("type").toString());
-                                mMeters.setText(document.get("meters").toString());
-                                mRooms.setText(document.get("rooms").toString());
-                                mAddress.setText(document.get("address").toString());
-                                mFloors.setText(document.get("floors").toString());
-                                mPrice.setText(document.get("price").toString());
-                                mAcquisition.setText(document.get("acquisition").toString());
-                                Picasso.get().load(document.get("image").toString()).into(mImage);
+                                String meters = document.get("meters").toString();
+                                String rooms = document.get("rooms").toString();
+                                String floors = document.get("floors").toString();
+                                String price = document.get("price").toString();
+                                String type = document.get("type").toString();
+                                String address = document.get("address").toString();
+                                String acquisition = document.get("acquisition").toString();
+                                String image = document.get("image").toString();
+
+                                property = new Property(
+                                        Integer.parseInt(meters),
+                                        Integer.parseInt(rooms),
+                                        Integer.parseInt(floors),
+                                        Integer.parseInt(price),
+                                        type,
+                                        address,
+                                        acquisition,
+                                        image
+                                );
+                                property.setId(document.getId());
+
+                                mType.setText(type);
+                                mMeters.setText(meters);
+                                mRooms.setText(rooms);
+                                mAddress.setText(address);
+                                mFloors.setText(floors);
+                                mPrice.setText(price);
+                                mAcquisition.setText(acquisition);
+                                Picasso.get().load(image).into(mImage);
                             }
                         } else {
                             Log.w("ERROR:", task.getException());
@@ -85,20 +106,25 @@ public class ShowProperty extends AppCompatActivity {
         mButtonFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int meters = Integer.parseInt(mMeters.getText().toString());
-                String type = mType.getText().toString();
-                int rooms = Integer.parseInt(mRooms.getText().toString());
-                String address = mAddress.getText().toString();
-                int floors = Integer.parseInt(mFloors.getText().toString());
-                int price = Integer.parseInt(mPrice.getText().toString());
-                String acquisition = mAcquisition.getText().toString();
-
-                Property property = new Property(meters, rooms, floors, price, type, address, acquisition, imgURL);
                 database.collection("users")
                         .document(currentUser.getUid())
                         .collection("favorites")
-                        .document()
-                        .set(property);
+                        .document(property.getId())
+                        .set(property)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ShowProperty.this, "Se añadió a favoritos", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(ShowProperty.this, ListFavorites.class);
+                                    startActivity(intent);
+                                } else {
+                                    Log.w("ERROR:", task.getException());
+                                    Toast.makeText(ShowProperty.this, "Hubo un error al agregar en favoritos", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
     }

@@ -3,11 +3,12 @@ package com.example.inmobiapp.models;
 import com.google.firebase.database.Exclude;
 
 public class Property {
+    @Exclude
+        String mId;
     int mMeters;
     int mRooms;
     int mFloors;
     int mPrice;
-    String mId;
     String mType;
     String mAddress;
     String mAcquisition;

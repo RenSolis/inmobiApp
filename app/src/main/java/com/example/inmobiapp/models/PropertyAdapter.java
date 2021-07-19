@@ -68,7 +68,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
             type = itemView.findViewById(R.id.item_TVType);
             acquisition = itemView.findViewById(R.id.item_TVAdq);
             address = itemView.findViewById(R.id.item_TVAddress);
-            imgURL = itemView.findViewById(R.id.item_Img);
+            imgURL = itemView.findViewById(R.id.favorite_img);
             mBSeeMore = itemView.findViewById(R.id.item_BttnSeeMore);
         }
     }
