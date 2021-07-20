@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "473702523229",
+    "project_id": "inmobiapp-81ba5",
+    "storage_bucket": "inmobiapp-81ba5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473702523229:android:1b797e4e6dcd919f14c8b4",
+        "android_client_info": {
+          "package_name": "com.example.inmobiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473702523229-r9dplpm8k3s87u1i2ncefhu478icnok1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.inmobiapp",
+            "certificate_hash": "866a6d615f0dd0764a19e04f7dc88615db492a52"
+          }
+        },
+        {
+          "client_id": "473702523229-jond2oft12e94os7fjru986cp2340s9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOlycdcqHBhcRQ_eysb0B4dDRLZixm90U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473702523229-jond2oft12e94os7fjru986cp2340s9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
