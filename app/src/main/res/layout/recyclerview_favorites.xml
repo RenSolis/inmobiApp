@@ -9,7 +9,6 @@
         android:id="@+id/text_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Favoritos"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@id/listFavorites"
         app:layout_constraintEnd_toEndOf="@id/listFavorites"

@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
-                                            Intent intent = new Intent(LoginActivity.this, ListProperties.class);
+                                            Intent intent = new Intent(LoginActivity.this, MainLogged.class);
                                             startActivity(intent);
                                         } else {
                                             Log.w("Error Login:", task.getException());
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     Toast.makeText(LoginActivity.this,"Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(LoginActivity.this, ListProperties.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainLogged.class);
                                     startActivity(intent);
                                 } else {
                                     Log.w("Error Login:", task.getException());
