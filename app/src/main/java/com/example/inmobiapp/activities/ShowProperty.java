@@ -3,6 +3,7 @@ package com.example.inmobiapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,11 +12,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.inmobiapp.R;
+import com.example.inmobiapp.fragments.ListFavoritesFragment;
+import com.example.inmobiapp.fragments.ListOwnerPropertiesFragment;
+import com.example.inmobiapp.fragments.ListPropertiesFragment;
 import com.example.inmobiapp.models.Property;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,6 +42,7 @@ public class ShowProperty extends AppCompatActivity {
     FirebaseFirestore database;
     String imgURL;
     Property property;
+    BottomNavigationView bottomNavigation;
     // TODO: crear un property donde se almacenen al obtenerlo todos los attributes y a partir de eso reutilizar
 
     @Override
@@ -117,7 +125,8 @@ public class ShowProperty extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ShowProperty.this, "Se añadió a favoritos", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(ShowProperty.this, ListFavorites.class);
+                                    Intent intent = new Intent(ShowProperty.this, MainLogged.class);
+                                    intent.putExtra("favorites", true);
                                     startActivity(intent);
                                 } else {
                                     Log.w("ERROR:", task.getException());
@@ -128,4 +137,29 @@ public class ShowProperty extends AppCompatActivity {
             }
         });
     }
+
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent intent;
+            switch(item.getItemId()) {
+                case R.id.navigation_home:
+                    intent = new Intent(ShowProperty.this, MainLogged.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.navigation_favorites:
+                    intent = new Intent(ShowProperty.this, MainLogged.class);
+                    intent.putExtra("favorites", true);
+                    startActivity(intent);
+                    return true;
+                case R.id.navigation_owner_properties:
+                    intent = new Intent(ShowProperty.this, MainLogged.class);
+                    intent.putExtra("owners", true);
+                    startActivity(intent);
+                    return true;
+            }
+
+            return false;
+        }
+    };
 }
