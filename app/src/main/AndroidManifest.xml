@@ -21,9 +21,5 @@
         </activity>
         <activity android:name=".activities.MainLogged" />
         <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.ListProperties" />
-        <activity android:name=".activities.ShowProperty" />
-        <activity android:name=".activities.ListFavorites" />
     </application>
-
 </manifest>

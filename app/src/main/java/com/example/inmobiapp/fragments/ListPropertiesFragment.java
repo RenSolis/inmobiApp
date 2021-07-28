@@ -1,6 +1,5 @@
 package com.example.inmobiapp.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobiapp.R;
-import com.example.inmobiapp.activities.ShowProperty;
 import com.example.inmobiapp.models.Property;
 import com.example.inmobiapp.models.PropertyAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,9 +82,12 @@ public class ListPropertiesFragment extends Fragment {
                                 public void onItemClickListener(Property property) {
                                     Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_SHORT);
 
-                                    Intent intent = new Intent(getActivity(), ShowProperty.class);
-                                    intent.putExtra("property_key", property.getId());
-                                    startActivity(intent);
+                                    PropertyShowFragment fragment = PropertyShowFragment.newInstance(property.getId());
+                                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+                                    transaction.replace(R.id.container, fragment);
+                                    transaction.addToBackStack(null);
+                                    transaction.commit();
                                 }
                             });
 

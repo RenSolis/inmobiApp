@@ -26,20 +26,7 @@ public class MainLogged extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.navigationBar);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String type = extras.getString("type");
-
-            if (extras.getBoolean("favorites")) {
-                openFragment(ListFavoritesFragment.newInstance());
-            } else if (extras.getBoolean("owners")) {
-                openFragment(ListOwnerPropertiesFragment.newInstance());
-            } else {
-                openFragment(ListPropertiesFragment.newInstance());
-            }
-        } else {
-            openFragment(ListPropertiesFragment.newInstance());
-        }
+        openFragment(ListPropertiesFragment.newInstance());
     }
 
     public void openFragment(Fragment fragment) {

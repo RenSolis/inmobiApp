@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(RegisterActivity.this, "Registro exitoso!", Toast.LENGTH_SHORT).show();
 
-                                                    Intent intent = new Intent(RegisterActivity.this, ListProperties.class);
+                                                    Intent intent = new Intent(RegisterActivity.this, MainLogged.class);
                                                     startActivity(intent);
                                                 } else {
                                                     Log.w("Error Login:", task.getException());
