@@ -13,10 +13,11 @@ public class Property {
     String mAddress;
     String mAcquisition;
     String mImage;
+    String mPhone;
 
     public Property() {}
 
-    public Property(int meters, int rooms, int floors, int price, String type, String address, String acquisition, String image) {
+    public Property(int meters, int rooms, int floors, int price, String type, String address, String acquisition, String image, String phone) {
         mMeters = meters;
         mRooms = rooms;
         mFloors = floors;
@@ -25,6 +26,15 @@ public class Property {
         mAddress = address;
         mAcquisition = acquisition;
         mImage = image;
+        mPhone = phone;
+    }
+
+    public String getPhone() {
+        return mPhone;
+    }
+
+    public void setPhone(String phone) {
+        this.mPhone = phone;
     }
 
     public int getMeters() {

@@ -36,11 +36,6 @@ public class ListPropertiesFragment extends Fragment {
     public static ListPropertiesFragment newInstance() {
         ListPropertiesFragment fragment = new ListPropertiesFragment();
 
-        // Bundle args = new Bundle();
-        // args.putString("algo", param1);
-        // args.putString("algo2", param2);
-        // fragment.setArguments(args);
-
         return fragment;
     }
 

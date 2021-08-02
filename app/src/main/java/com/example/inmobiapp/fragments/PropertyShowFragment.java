@@ -1,6 +1,9 @@
 package com.example.inmobiapp.fragments;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +39,7 @@ public class PropertyShowFragment extends Fragment {
     TextView mType;
     TextView mAcquisition;
     Button mButtonFavorite;
+    Button mButtonContact;
     FirebaseFirestore database;
     String imgURL;
     Property property;
@@ -64,6 +68,7 @@ public class PropertyShowFragment extends Fragment {
         mAcquisition = getView().findViewById(R.id.detail_TVAdq);
         mType = getView().findViewById(R.id.detail_TVType);
         mButtonFavorite = getView().findViewById(R.id.detail_BttnFavorite);
+        mButtonContact = getView().findViewById(R.id.detail_BttnContact);
 
         if (getArguments() == null) {
             return;
@@ -91,6 +96,7 @@ public class PropertyShowFragment extends Fragment {
                                 String address = document.get("address").toString();
                                 String acquisition = document.get("acquisition").toString();
                                 String image = document.get("image").toString();
+                                String phone = document.get("phone").toString();
 
                                 property = new Property(
                                         Integer.parseInt(meters),
@@ -100,7 +106,8 @@ public class PropertyShowFragment extends Fragment {
                                         type,
                                         address,
                                         acquisition,
-                                        image
+                                        image,
+                                        phone
                                 );
                                 property.setId(document.getId());
 
@@ -147,6 +154,23 @@ public class PropertyShowFragment extends Fragment {
                                 }
                             }
                         });
+            }
+        });
+
+        mButtonContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PackageManager pm = getActivity().getPackageManager();
+                try {
+                    pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://api.whatsapp.com/send?phone=" + property.getPhone() + "&text=" +
+                                    "Quisiera sabes más sobre la propiedad: " + property.getId()));
+                    startActivity(intent);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Toast.makeText(getActivity(), "WhatsApp no instalado!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
