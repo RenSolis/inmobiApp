@@ -13,6 +13,7 @@ import com.example.inmobiapp.R;
 import com.example.inmobiapp.fragments.ListFavoritesFragment;
 import com.example.inmobiapp.fragments.ListOwnerPropertiesFragment;
 import com.example.inmobiapp.fragments.ListPropertiesFragment;
+import com.example.inmobiapp.fragments.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainLogged extends AppCompatActivity {
@@ -49,6 +50,9 @@ public class MainLogged extends AppCompatActivity {
                     return true;
                 case R.id.navigation_owner_properties:
                     openFragment(ListOwnerPropertiesFragment.newInstance());
+                    return true;
+                case R.id.navigation_profile:
+                    openFragment(UserProfileFragment.newInstance());
                     return true;
             }
 
