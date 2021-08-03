@@ -30,6 +30,7 @@ public class MainLogged extends AppCompatActivity {
         openFragment(ListPropertiesFragment.newInstance());
     }
 
+    //Inicializamos el fragmento que contendrá el listado
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -37,22 +38,22 @@ public class MainLogged extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
+    //Establecemos la navegación dentro de la página. Permitirá redirigir hacia las disitintas pantallas.
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()) {
                 case R.id.navigation_home:
-                    openFragment(ListPropertiesFragment.newInstance());
+                    openFragment(ListPropertiesFragment.newInstance()); //Hacia el home.
                     return true;
                 case R.id.navigation_favorites:
-                    openFragment(ListFavoritesFragment.newInstance());
+                    openFragment(ListFavoritesFragment.newInstance()); //Hacia la pantalla de favoritos.
                     return true;
                 case R.id.navigation_owner_properties:
-                    openFragment(ListOwnerPropertiesFragment.newInstance());
+                    openFragment(ListOwnerPropertiesFragment.newInstance()); //Hacia la pantalla de mis propiedades.
                     return true;
                 case R.id.navigation_profile:
-                    openFragment(UserProfileFragment.newInstance());
+                    openFragment(UserProfileFragment.newInstance()); //Hacia la pantalla de mi perfil.
                     return true;
             }
 

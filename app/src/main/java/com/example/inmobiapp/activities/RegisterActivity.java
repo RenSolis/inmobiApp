@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
+    // Declaramos las variables a usar por toda la aplicación.
     EditText et_Name;
     EditText et_LastName;
     EditText et_Email;
@@ -36,11 +37,13 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore database;
 
+    //Función de registro dentro de la aplicación.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //Inicializamos variables de campos necesarios para registro en aplicación.
         et_Name = findViewById(R.id.et_name);
         et_LastName = findViewById(R.id.et_lastname);
         et_Email = findViewById(R.id.et_email);
@@ -48,8 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
         et_PasswordConfirmation = findViewById(R.id.et_confirmpassword);
         b_Register = findViewById(R.id.register_button);
 
+        //Conexión a firebase.
         database = FirebaseFirestore.getInstance();
 
+        //Función activada al dar click en el boton de registro.
         b_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,12 +64,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String password;
                 String passwordConfirmation;
 
+                //Obtenemos los datos dentro de los campos y los asignamos en las variables.
                 name = et_Name.getText().toString().trim();
                 lastName = et_LastName.getText().toString().trim();
                 email = et_Email.getText().toString().trim();
                 password = et_Password.getText().toString().trim();
                 passwordConfirmation = et_PasswordConfirmation.getText().toString().trim();
 
+                // Validaciones para los campos.
                 if (TextUtils.isEmpty(name)) {
                     et_Name.setError("Nombre obligatorio");
                     return;
@@ -100,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                // Realiza conexión con firebase y realiza la validación.
                 mFirebaseAuth = FirebaseAuth.getInstance();
                 mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
