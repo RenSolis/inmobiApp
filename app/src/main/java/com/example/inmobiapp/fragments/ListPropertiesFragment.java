@@ -1,10 +1,12 @@
 package com.example.inmobiapp.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,12 +26,17 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class ListPropertiesFragment extends Fragment {
+public class ListPropertiesFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView mRecyclerView;
     PropertyAdapter mPropertyAdapter;
     ArrayList<Property> mPropertyList;
+    private ArrayList<Property> mPropertyListSearch;
     FirebaseFirestore database;
+    private SearchView mSearchView;
 
     public ListPropertiesFragment() {}
 
@@ -45,6 +52,10 @@ public class ListPropertiesFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mSearchView = (SearchView) getView().findViewById(R.id.inSearch);
+        initListener();
+
 
         database = FirebaseFirestore.getInstance();
 
@@ -72,6 +83,8 @@ public class ListPropertiesFragment extends Fragment {
                                 mPropertyList.add(property);
                             }
 
+                            mPropertyListSearch.addAll(mPropertyList);
+
                             mPropertyAdapter = new PropertyAdapter(getActivity(), mPropertyList, new PropertyAdapter.ItemClickListener() {
                                 @Override
                                 public void onItemClickListener(Property property) {
@@ -98,5 +111,42 @@ public class ListPropertiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.recyclerview_inmuebles, container, false);
+    }
+
+    public void filter(String strSearch){
+        if (strSearch.length() == 0){
+            mPropertyListSearch.clear();
+            mPropertyListSearch.addAll(mPropertyList);
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mPropertyListSearch.clear();
+                List collect = mPropertyList.stream()
+                        .filter(i->i.getAddress().toLowerCase().contains(strSearch))
+                        .collect(Collectors.toList());
+                mPropertyListSearch.addAll(collect);
+            }else{
+                mPropertyListSearch.clear();
+                for (Property i : mPropertyList){
+                    if(i.getAddress().toLowerCase().contains(strSearch)){
+                        mPropertyListSearch.add(i);
+                    }
+                }
+            }
+        }
+    }
+
+    private void initListener() {
+        mSearchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        filter(s);
+        return false;
     }
 }
