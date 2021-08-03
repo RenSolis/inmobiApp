@@ -60,6 +60,7 @@ public class ListPropertiesFragment extends Fragment implements SearchView.OnQue
         database = FirebaseFirestore.getInstance();
 
         mPropertyList = new ArrayList<Property>();
+        mPropertyListSearch = new ArrayList<Property>();
 
         getProperties();
     }
@@ -84,22 +85,7 @@ public class ListPropertiesFragment extends Fragment implements SearchView.OnQue
                             }
 
                             mPropertyListSearch.addAll(mPropertyList);
-
-                            mPropertyAdapter = new PropertyAdapter(getActivity(), mPropertyList, new PropertyAdapter.ItemClickListener() {
-                                @Override
-                                public void onItemClickListener(Property property) {
-                                    Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_SHORT);
-
-                                    PropertyShowFragment fragment = PropertyShowFragment.newInstance(property.getId());
-                                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-
-                                    transaction.replace(R.id.container, fragment);
-                                    transaction.addToBackStack(null);
-                                    transaction.commit();
-                                }
-                            });
-
-                            mRecyclerView.setAdapter(mPropertyAdapter);
+                            setPropertiesAdapter(mPropertyListSearch);
                         } else {
                             Log.w("ERROR", "Error getting documents: " + task.getException());
                         }
@@ -133,6 +119,8 @@ public class ListPropertiesFragment extends Fragment implements SearchView.OnQue
                 }
             }
         }
+
+        setPropertiesAdapter(mPropertyListSearch);
     }
 
     private void initListener() {
@@ -148,5 +136,23 @@ public class ListPropertiesFragment extends Fragment implements SearchView.OnQue
     public boolean onQueryTextChange(String s) {
         filter(s);
         return false;
+    }
+
+    public void setPropertiesAdapter(ArrayList properties) {
+        mPropertyAdapter = new PropertyAdapter(getActivity(), properties, new PropertyAdapter.ItemClickListener() {
+            @Override
+            public void onItemClickListener(Property property) {
+                Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_SHORT);
+
+                PropertyShowFragment fragment = PropertyShowFragment.newInstance(property.getId());
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        mRecyclerView.setAdapter(mPropertyAdapter);
     }
 }
